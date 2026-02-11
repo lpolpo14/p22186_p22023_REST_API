@@ -44,6 +44,10 @@ group :test do
   gem 'database_cleaner'
 end
 
+gem 'bcrypt', '~> 3.1.7'
+
+gem 'jwt'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 # gem "rack-cors"
 
