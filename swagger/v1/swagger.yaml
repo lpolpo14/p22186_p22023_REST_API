@@ -1,0 +1,287 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/signup":
+    post:
+      summary: Signup
+      tags:
+      - Auth
+      parameters: []
+      responses:
+        '201':
+          description: account created
+        '422':
+          description: validation failed
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Mike
+                email:
+                  type: string
+                  example: p22186@unipi.gr
+                password:
+                  type: string
+                  example: password123
+                password_confirmation:
+                  type: string
+                  example: password123
+              required:
+              - name
+              - email
+              - password
+              - password_confirmation
+  "/auth/login":
+    post:
+      summary: Login
+      tags:
+      - Auth
+      parameters: []
+      responses:
+        '200':
+          description: login successful
+        '401':
+          description: invalid credentials
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: p22186@unipi.gr
+                password:
+                  type: string
+                  example: password123
+              required:
+              - email
+              - password
+  "/auth/logout":
+    get:
+      summary: Logout
+      tags:
+      - Auth
+      security:
+      - jwt: []
+      responses:
+        '200':
+          description: logged out
+        '401':
+          description: unauthorized
+  "/todos/{todo_id}/items":
+    parameters:
+    - name: todo_id
+      in: path
+      description: Todo id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: List todo items
+      security:
+      - jwt: []
+      tags:
+      - Todo Items
+      responses:
+        '200':
+          description: items listed
+        '404':
+          description: todo not found
+        '401':
+          description: unauthorized
+    post:
+      summary: Create a todo item
+      tags:
+      - Todo Items
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '201':
+          description: item created
+        '422':
+          description: validation failed
+        '401':
+          description: unauthorized
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                done:
+                  type: boolean
+              required:
+              - name
+  "/todos/{todo_id}/items/{id}":
+    parameters:
+    - name: todo_id
+      in: path
+      description: Todo id
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: Item id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get a todo item
+      security:
+      - jwt: []
+      tags:
+      - Todo Items
+      responses:
+        '200':
+          description: item found
+        '404':
+          description: item not found
+        '401':
+          description: unauthorized
+    put:
+      summary: Update a todo item
+      tags:
+      - Todo Items
+      parameters: []
+      security:
+      - jwt: []
+      responses:
+        '204':
+          description: item updated
+        '404':
+          description: item not found
+        '401':
+          description: unauthorized
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                done:
+                  type: boolean
+    delete:
+      summary: Delete a todo item
+      tags:
+      - Todo Items
+      security:
+      - jwt: []
+      responses:
+        '204':
+          description: item deleted
+        '401':
+          description: unauthorized
+  "/todos":
+    get:
+      summary: List all Todos
+      security:
+      - jwt: []
+      tags:
+      - Todos
+      responses:
+        '200':
+          description: todos listed
+        '401':
+          description: unauthorized
+    post:
+      summary: Create a new todo
+      tags:
+      - Todos
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '201':
+          description: todo created
+        '422':
+          description: validation failed
+        '401':
+          description: unauthorized
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                created_by:
+                  type: string
+              required:
+              - title
+  "/todos/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: Todo id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get a todo
+      tags:
+      - Todos
+      security:
+      - jwt: []
+      responses:
+        '200':
+          description: todo found
+        '404':
+          description: todo not found
+        '401':
+          description: unauthorized
+    put:
+      summary: Update a todo
+      tags:
+      - Todos
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        '204':
+          description: todo updated
+        '401':
+          description: unauthorized
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+    delete:
+      summary: Delete a todo and its items
+      tags:
+      - Todos
+      security:
+      - jwt: []
+      responses:
+        '204':
+          description: todo deleted
+        '401':
+          description: unauthorized
+servers:
+- url: http://localhost:3000
+components:
+  securitySchemes:
+    jwt:
+      type: apiKey
+      name: Authorization
+      in: header
+security:
+- jwt: []
