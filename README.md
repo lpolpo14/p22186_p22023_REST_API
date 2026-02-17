@@ -1,24 +1,28 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Developed by P22186 (Michael Favvas) and P22023 (Dimitrios Vlachopoulos)
 
-Things you may want to cover:
+Used **ruby 3.4.7** and **Rails 8.1.2**.
 
-* Ruby version
+## How to run
 
-* System dependencies
+Follow these steps:
 
-* Configuration
+```console
+# Install all the Gems
+bundle install 
 
-* Database creation
+# Create the Database 
+rails db:create
 
-* Database initialization
+# Run the Migrations
+rails db:migrate
 
-* How to run the test suite
+# Prepere the Test DB
+rails db:test:prepare
 
-* Services (job queues, cache servers, search engines, etc.)
+# Start the server
+rails server
+```
 
-* Deployment instructions
-
-* ...
+**Swagger UI** is available at http://localhost:3000/api-docs/index.html .
