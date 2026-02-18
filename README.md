@@ -25,4 +25,4 @@ rails db:test:prepare
 rails server
 ```
 
-**Swagger UI** is available at http://localhost:3000/api-docs/index.html .
+**Swagger UI** is available at http://localhost:3000/api-docs/index.html . It was generated using **RSwag**, with the relevant files being located in spec/integration. When testing exclude that directory (Or remove it entirely).
