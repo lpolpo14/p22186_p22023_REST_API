@@ -2,6 +2,8 @@
 
 Developed by P22186 (Michael Favvas) and P22023 (Dimitrios Vlachopoulos)
 
+Based on [Build a restful json api with rails](https://www.digitalocean.com/community/tutorials/build-a-restful-json-api-with-rails-5-part-one) .
+
 Used **ruby 3.4.7** and **Rails 8.1.2**.
 
 ## How to run
