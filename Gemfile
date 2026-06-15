@@ -34,7 +34,7 @@ gem "image_processing", "~> 1.2"
 
 # Added for the application.
 group :development, :test do
-  gem 'rspec-rails', '~> 6'
+  gem 'rspec-rails', '~> 8'
 end
 
 group :test do
